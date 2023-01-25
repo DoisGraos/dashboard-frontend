@@ -1,0 +1,11 @@
+.main {
+  @apply flex justify-center w-screen;
+}
+
+.form {
+  @apply flex flex-col gap-3 w-fit mt-20 p-10 rounded-lg bg-white shadow-sm;
+}
+
+.logo {
+  @apply mb-5;
+}
