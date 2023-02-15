@@ -4,8 +4,12 @@ import { Button } from "antd";
 import { Input, Password } from "@/components";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { schemaLogin } from "@/schemas";
+import { AuthService } from "@/services";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -13,7 +17,10 @@ const Login = () => {
     },
     validationSchema: schemaLogin,
     onSubmit: async (data) => {
-      console.log("submit: ", data);
+      const { user, access_token } = await AuthService.signIn(data);
+
+      sessionStorage.setItem("accessToken", access_token);
+      router.push(`/${user.id}`);
     },
   });
 
